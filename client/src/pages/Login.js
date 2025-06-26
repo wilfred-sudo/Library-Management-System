@@ -14,8 +14,8 @@ const Login = () => {
   });
 
   return (
-    <div className="max-w-md mx-auto">
-      <h1 className="text-3xl font-bold mb-6">Login</h1>
+    <div style={{ maxWidth: '400px', margin: '0 auto' }}>
+      <h1>Login</h1>
       <div className="card">
         <Formik
           initialValues={{ email: '', password: '' }}
@@ -26,21 +26,23 @@ const Login = () => {
           }}
         >
           <Form>
-            <div className="mb-4">
-              <label className="block text-gray-700">Email</label>
-              <Field name="email" type="email" className="w-full p-2 border rounded" />
-              <ErrorMessage name="email" component="div" className="text-red-500" />
+            <div style={{ marginBottom: '1rem' }}>
+              <label>Email</label>
+              <Field name="email" type="email" />
+              <ErrorMessage name="email" component="div" className="error" />
             </div>
-            <div className="mb-4">
-              <label className="block text-gray-700">Password</label>
-              <Field name="password" type="password" className="w-full p-2 border rounded" />
-              <ErrorMessage name="password" component="div" className="text-red-500" />
+            <div style={{ marginBottom: '1rem' }}>
+              <label>Password</label>
+              <Field name="password" type="password" />
+              <ErrorMessage name="password" component="div" className="error" />
             </div>
             <button type="submit" className="btn btn-primary">Login</button>
           </Form>
         </Formik>
-        <p className="mt-4">
-          <Link to="/forgot-password" className="text-blue-600 hover:underline">Forgot Password?</Link>
+        <p style={{ marginTop: '1rem' }}>
+          <Link to="/forgot-password" style={{ color: '#2563eb', textDecoration: 'underline' }}>
+            Forgot Password?
+          </Link>
         </p>
       </div>
     </div>

@@ -22,14 +22,15 @@ const Borrow = () => {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-6">Borrow Books</h1>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <h1>Borrow Books</h1>
+      <div className="grid">
         {books.map(book => (
           <div key={book.id} className="card">
             <BookCard book={book} />
             <button
               onClick={() => handleBorrow(book.id)}
-              className="btn btn-primary mt-4"
+              className="btn btn-primary"
+              style={{ marginTop: '1rem' }}
             >
               Borrow
             </button>

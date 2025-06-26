@@ -18,8 +18,8 @@ const ReviewForm = ({ bookId, onReviewAdded }) => {
   });
 
   return (
-    <div className="card mt-4">
-      <h3 className="text-lg font-semibold">Add Review</h3>
+    <div className="card" style={{ marginTop: '1rem' }}>
+      <h3>Add Review</h3>
       <Formik
         initialValues={{ rating: '', comment: '' }}
         validationSchema={validationSchema}
@@ -30,15 +30,15 @@ const ReviewForm = ({ bookId, onReviewAdded }) => {
         }}
       >
         <Form>
-          <div className="mb-4">
-            <label className="block text-gray-700">Rating (1-5)</label>
-            <Field name="rating" type="number" className="w-full p-2 border rounded" />
-            <ErrorMessage name="rating" component="div" className="text-red-500" />
+          <div style={{ marginBottom: '1rem' }}>
+            <label>Rating (1-5)</label>
+            <Field name="rating" type="number" />
+            <ErrorMessage name="rating" component="div" className="error" />
           </div>
-          <div className="mb-4">
-            <label className="block text-gray-700">Comment</label>
-            <Field as="textarea" name="comment" className="w-full p-2 border rounded" />
-            <ErrorMessage name="comment" component="div" className="text-red-500" />
+          <div style={{ marginBottom: '1rem' }}>
+            <label>Comment</label>
+            <Field as="textarea" name="comment" />
+            <ErrorMessage name="comment" component="div" className="error" />
           </div>
           <button type="submit" className="btn btn-primary">Submit Review</button>
         </Form>

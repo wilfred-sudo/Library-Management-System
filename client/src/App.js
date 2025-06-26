@@ -9,7 +9,7 @@ import Profile from './pages/Profile';
 import Borrow from './pages/Borrow';
 import AdminBooks from './pages/AdminBooks';
 import ProtectedRoute from './components/ProtectedRoute';
-import { AuthProvider } from './utils/AuthContext';
+import { AuthContext, AuthProvider } from './utils/AuthContext';
 
 function App() {
   return (

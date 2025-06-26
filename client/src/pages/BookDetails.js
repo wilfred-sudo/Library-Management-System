@@ -22,17 +22,17 @@ const BookDetails = () => {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-6">{book.title}</h1>
+      <h1>{book.title}</h1>
       <div className="card">
         <p><strong>Author:</strong> {book.author}</p>
         <p><strong>ISBN:</strong> {book.isbn}</p>
         <p><strong>Available Copies:</strong> {book.available_copies}</p>
       </div>
-      <h2 className="text-2xl font-semibold mt-6 mb-4">Reviews</h2>
+      <h2>Reviews</h2>
       {book.reviews.length === 0 ? (
         <p>No reviews yet.</p>
       ) : (
-        <div className="space-y-4">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           {book.reviews.map(review => (
             <div key={review.id} className="card">
               <p><strong>{review.user}</strong>: {review.rating}/5</p>

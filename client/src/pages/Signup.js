@@ -18,8 +18,8 @@ const Signup = () => {
   });
 
   return (
-    <div className="max-w-md mx-auto">
-      <h1 className="text-3xl font-bold mb-6">Sign Up</h1>
+    <div style={{ maxWidth: '400px', margin: '0 auto' }}>
+      <h1>Sign Up</h1>
       <div className="card">
         <Formik
           initialValues={{ username: '', email: '', password: '' }}
@@ -30,20 +30,20 @@ const Signup = () => {
           }}
         >
           <Form>
-            <div className="mb-4">
-              <label className="block text-gray-700">Username</label>
-              <Field name="username" type="text" className="w-full p-2 border rounded" />
-              <ErrorMessage name="username" component="div" className="text-red-500" />
+            <div style={{ marginBottom: '1rem' }}>
+              <label>Username</label>
+              <Field name="username" type="text" />
+              <ErrorMessage name="username" component="div" className="error" />
             </div>
-            <div className="mb-4">
-              <label className="block text-gray-700">Email</label>
-              <Field name="email" type="email" className="w-full p-2 border rounded" />
-              <ErrorMessage name="email" component="div" className="text-red-500" />
+            <div style={{ marginBottom: '1rem' }}>
+              <label>Email</label>
+              <Field name="email" type="email" />
+              <ErrorMessage name="email" component="div" className="error" />
             </div>
-            <div className="mb-4">
-              <label className="block text-gray-700">Password</label>
-              <Field name="password" type="password" className="w-full p-2 border rounded" />
-              <ErrorMessage name="password" component="div" className="text-red-500" />
+            <div style={{ marginBottom: '1rem' }}>
+              <label>Password</label>
+              <Field name="password" type="password" />
+              <ErrorMessage name="password" component="div" className="error" />
             </div>
             <button type="submit" className="btn btn-primary">Sign Up</button>
           </Form>

@@ -33,9 +33,10 @@ export const deleteBook = async (id, token) => {
 };
 
 export const borrowBook = async (bookId, token) => {
-  await axios.post(`${API_URL}/borrow`, { book_id: bookId }, {
+  const res = await axios.post(`${API_URL}/borrow`, { book_id: bookId }, {
     headers: { Authorization: `Bearer ${token}` }
   });
+  return res.data;
 };
 
 export const addReview = async (reviewData, token) => {
