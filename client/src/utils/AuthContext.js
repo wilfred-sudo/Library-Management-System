@@ -11,20 +11,21 @@ export const AuthProvider = ({ children }) => {
     if (token) {
       axios.get('http://localhost:5000/api/profile', {
         headers: { Authorization: `Bearer ${token}` }
-      }).then(res => setUser(res.data)).catch(() => localStorage.removeItem('token'));
+      }).then(res => setUser({ id: res.data.id, role: res.data.role, token }))
+        .catch(() => localStorage.removeItem('token'));
     }
   }, []);
 
   const login = async (email, password) => {
     const res = await axios.post('http://localhost:5000/api/login', { email, password });
     localStorage.setItem('token', res.data.token);
-    setUser({ id: res.data.id, role: res.data.role });
+    setUser({ id: res.data.id, role: res.data.role, token: res.data.token });
   };
 
   const signup = async (username, email, password) => {
     const res = await axios.post('http://localhost:5000/api/signup', { username, email, password });
     localStorage.setItem('token', res.data.token);
-    setUser({ id: res.data.id, role: res.data.role });
+    setUser({ id: res.data.id, role: res.data.role, token: res.data.token });
   };
 
   const logout = () => {

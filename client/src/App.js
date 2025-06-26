@@ -8,6 +8,7 @@ import Signup from './pages/Signup';
 import Profile from './pages/Profile';
 import Borrow from './pages/Borrow';
 import AdminBooks from './pages/AdminBooks';
+import ProtectedRoute from './components/ProtectedRoute';
 import { AuthProvider } from './utils/AuthContext';
 
 function App() {
@@ -15,16 +16,18 @@ function App() {
     <AuthProvider>
       <Router>
         <Navbar />
-        <Routes>
-          <Route path="/home" element={<Home />} />
-          <Route path="/books" element={<Books />} />
-          <Route path="/books/:id" element={<BookDetails />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/borrow" element={<Borrow />} />
-          <Route path="/admin/books" element={<AdminBooks />} />
-        </Routes>
+        <div className="container">
+          <Routes>
+            <Route path="/home" element={<Home />} />
+            <Route path="/books" element={<Books />} />
+            <Route path="/books/:id" element={<BookDetails />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/profile" element={<ProtectedRoute component={Profile} />} />
+            <Route path="/borrow" element={<ProtectedRoute component={Borrow} />} />
+            <Route path="/admin/books" element={<ProtectedRoute component={AdminBooks} adminOnly />} />
+          </Routes>
+        </div>
       </Router>
     </AuthProvider>
   );
