@@ -18,39 +18,37 @@ const Signup = () => {
   });
 
   return (
-    <div style={{ maxWidth: '400px', margin: '0 auto' }}>
+    <div style={{ maxWidth: '400px', margin: '40px auto', background: 'white', padding: '20px', borderRadius: '8px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' , border:'2px solid  #111827' }}>
       <h1>Sign Up</h1>
-      <div className="card">
-        <Formik
-          initialValues={{ username: '', email: '', password: '' }}
-          validationSchema={validationSchema}
-          onSubmit={async (values) => {
-            await signup(values.username, values.email, values.password);
-            navigate('/profile');
-          }}
-        >
-          <Form>
-            <div style={{ marginBottom: '1rem' }}>
-              <label>Username</label>
-              <Field name="username" type="text" />
-              <ErrorMessage name="username" component="div" className="error" />
-            </div>
-            <div style={{ marginBottom: '1rem' }}>
-              <label>Email</label>
-              <Field name="email" type="email" />
-              <ErrorMessage name="email" component="div" className="error" />
-            </div>
-            <div style={{ marginBottom: '1rem' }}>
-              <label>Password</label>
-              <Field name="password" type="password" />
-              <ErrorMessage name="password" component="div" className="error" />
-            </div>
-            <button type="submit" className="btn btn-primary">Sign Up</button>
-          </Form>
-        </Formik>
-      </div>
+      <Formik
+        initialValues={{ username: '', email: '', password: '' }}
+        validationSchema={validationSchema}
+        onSubmit={async (values) => {
+          await signup(values.username, values.email, values.password);
+          navigate('/profile');
+        }}
+      >
+        <Form>
+          <div className="form-group">
+            <label>Username</label>
+            <Field name="username" type="text" />
+            <ErrorMessage name="username" component="div" className="error" />
+          </div>
+          <div className="form-group">
+            <label>Email</label>
+            <Field name="email" type="email" />
+            <ErrorMessage name="email" component="div" className="error" />
+          </div>
+          <div className="form-group">
+            <label>Password</label>
+            <Field name="password" type="password" />
+            <ErrorMessage name="password" component="div" className="error" />
+          </div>
+          <button type="submit" className="btn btn-primary">Sign Up</button>
+        </Form>
+      </Formik>
     </div>
   );
 };
 
-export default Signup;
+export default Signup; 

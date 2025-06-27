@@ -14,37 +14,35 @@ const Login = () => {
   });
 
   return (
-    <div style={{ maxWidth: '400px', margin: '0 auto' }}>
+    <div style={{ maxWidth: '400px', margin: '40px auto', background: 'white', padding: '20px', borderRadius: '8px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' , border:'2px solid  #111827' }}>
       <h1>Login</h1>
-      <div className="card">
-        <Formik
-          initialValues={{ email: '', password: '' }}
-          validationSchema={validationSchema}
-          onSubmit={async (values) => {
-            await login(values.email, values.password);
-            navigate('/profile');
-          }}
-        >
-          <Form>
-            <div style={{ marginBottom: '1rem' }}>
-              <label>Email</label>
-              <Field name="email" type="email" />
-              <ErrorMessage name="email" component="div" className="error" />
-            </div>
-            <div style={{ marginBottom: '1rem' }}>
-              <label>Password</label>
-              <Field name="password" type="password" />
-              <ErrorMessage name="password" component="div" className="error" />
-            </div>
-            <button type="submit" className="btn btn-primary">Login</button>
-          </Form>
-        </Formik>
-        <p style={{ marginTop: '1rem' }}>
-          <Link to="/forgot-password" style={{ color: '#2563eb', textDecoration: 'underline' }}>
-            Forgot Password?
-          </Link>
-        </p>
-      </div>
+      <Formik
+        initialValues={{ email: '', password: '' }}
+        validationSchema={validationSchema}
+        onSubmit={async (values) => {
+          await login(values.email, values.password);
+          navigate('/profile');
+        }}
+      >
+        <Form>
+          <div className="form-group">
+            <label>Email</label>
+            <Field name="email" type="email" />
+            <ErrorMessage name="email" component="div" className="error" />
+          </div>
+          <div className="form-group">
+            <label>Password</label>
+            <Field name="password" type="password" />
+            <ErrorMessage name="password" component="div" className="error" />
+          </div>
+          <button type="submit" className="btn btn-primary">Login</button>
+        </Form>
+      </Formik>
+      <p style={{ marginTop: '1rem', textAlign: 'center' }}>
+        <Link to="/forgot-password" style={{ color: '#2563eb', textDecoration: 'underline' }}>
+          Forgot Password?
+        </Link>
+      </p>
     </div>
   );
 };

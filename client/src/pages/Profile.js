@@ -25,34 +25,36 @@ const Profile = () => {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-6">Profile</h1>
-      <div className="card">
-        <h2 className="text-xl font-semibold mb-4">Update Profile</h2>
-        <Formik
-          initialValues={{ username: profile.username, email: profile.email }}
-          validationSchema={validationSchema}
-          onSubmit={async (values) => {
-            // Implement update profile API call
-            console.log('Update profile:', values);
-          }}
-        >
-          <Form>
-            <div className="mb-4">
-              <label className="block text-gray-700">Username</label>
-              <Field name="username" type="text" className="w-full p-2 border rounded" />
-              <ErrorMessage name="username" component="div" className="text-red-500" />
-            </div>
-            <div className="mb-4">
-              <label className="block text-gray-700">Email</label>
-              <Field name="email" type="email" className="w-full p-2 border rounded" />
-              <ErrorMessage name="email" component="div" className="text-red-500" />
-            </div>
-            <button type="submit" className="btn btn-primary">Update</button>
-          </Form>
-        </Formik>
+      <h1>Profile</h1>
+      <div className="card" style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+        <img src="https://via.placeholder.com/100" alt="Profile" style={{ borderRadius: '50%' }} />
+        <div>
+          <h2>Update Profile</h2>
+          <Formik
+            initialValues={{ username: profile.username, email: profile.email }}
+            validationSchema={validationSchema}
+            onSubmit={async (values) => {
+              console.log('Update profile:', values);
+            }}
+          >
+            <Form>
+              <div className="form-group">
+                <label>Username</label>
+                <Field name="username" type="text" />
+                <ErrorMessage name="username" component="div" className="error" />
+              </div>
+              <div className="form-group">
+                <label>Email</label>
+                <Field name="email" type="email" />
+                <ErrorMessage name="email" component="div" className="error" />
+              </div>
+              <button type="submit" className="btn btn-primary">Update</button>
+            </Form>
+          </Formik>
+        </div>
       </div>
-      <h2 className="text-xl font-semibold mt-6 mb-4">Borrowing History</h2>
-      <div className="space-y-4">
+      <h2>Borrowing History</h2>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
         {profile.borrow_records?.map(record => (
           <div key={record.id} className="card">
             <p><strong>Book:</strong> {record.book.title}</p>
