@@ -9,7 +9,7 @@ class User(db.Model):
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password_hash = db.Column(db.String(128), nullable=False)
-    role = db.Column(db.String(20), default='user')  # 'user' or 'admin'
+    role = db.Column(db.String(20), default='user')
     borrow_records = db.relationship('BorrowRecord', backref='user', lazy=True)
     reviews = db.relationship('Review', backref='user', lazy=True)
 
@@ -20,6 +20,7 @@ class Book(db.Model):
     author = db.Column(db.String(100), nullable=False)
     isbn = db.Column(db.String(13), unique=True, nullable=False)
     available_copies = db.Column(db.Integer, default=1)
+    image_url = db.Column(db.String(255), nullable=True)  # New field for image URL
     borrow_records = db.relationship('BorrowRecord', backref='book', lazy=True)
     reviews = db.relationship('Review', backref='book', lazy=True)
 
@@ -36,5 +37,5 @@ class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     book_id = db.Column(db.Integer, db.ForeignKey('books.id'), nullable=False)
-    rating = db.Column(db.Integer, nullable=False)  # 1-5
-    comment = db.Column(db.Text, nullable=False)    # User-submittable attribute
+    rating = db.Column(db.Integer, nullable=False)
+    comment = db.Column(db.Text, nullable=False)
