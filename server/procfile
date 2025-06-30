@@ -1,2 +1,0 @@
-txt
-web: gunicorn run:app

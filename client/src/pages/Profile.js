@@ -1,3 +1,4 @@
+// src/pages/Profile.js
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../utils/AuthContext';
 import { getProfile } from '../utils/api';
@@ -7,11 +8,17 @@ import * as Yup from 'yup';
 const Profile = () => {
   const { user } = useContext(AuthContext);
   const [profile, setProfile] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchProfile = async () => {
-      const data = await getProfile(user.token);
-      setProfile(data);
+      try {
+        const data = await getProfile(user.token);
+        setProfile(data);
+      } catch (err) {
+        console.error('Profile fetch error:', err.message);
+        setError(err.message);
+      }
     };
     fetchProfile();
   }, [user]);
@@ -21,7 +28,8 @@ const Profile = () => {
     email: Yup.string().email('Invalid email format').required('Email is required'),
   });
 
-  if (!profile) return <div>Loading...</div>;
+  if (error) return <div style={{ color: 'red', padding: '20px' }}>{error}</div>;
+  if (!profile) return <div style={{ padding: '20px', textAlign: 'center' }}>Loading...</div>;
 
   return (
     <div>

@@ -1,18 +1,20 @@
-from flask import Flask
-from flask_cors import CORS
-from flask_jwt_extended import JWTManager
-from flask_migrate import Migrate
-from .models import db
+from flask import Flask, send_from_directory
 from .routes import bp
+from flask_cors import CORS 
 
 def create_app():
-    app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///library.db'
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['JWT_SECRET_KEY'] = 'your-secret-key'  
-    CORS(app)
-    JWTManager(app)
-    db.init_app(app)
-    Migrate(app, db)  # Initialize Flask-Migrate
-    app.register_blueprint(bp)  # Register the Blueprint from routes.py
+    app = Flask(__name__, static_folder='../build', static_url_path='')
+    CORS(app)  # Enable CORS for frontend-backend communication
+
+    app.register_blueprint(bp)
+
+    @app.route('/', defaults={'path': ''})
+    @app.route('/<path:path>')
+    def serve(path):
+        if path != "" and os.path.exists(os.path.join(app.static_folder, path)):
+            return send_from_directory(app.static_folder, path)
+        return send_from_directory(app.static_folder, 'index.html')
+
     return app
+
+import os
