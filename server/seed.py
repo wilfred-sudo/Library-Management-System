@@ -21,12 +21,12 @@ def seed_data():
         Book(title='48 Laws of Power', author='Robert Greene', isbn='9780670881468', available_copies=5, image_url='https://via.placeholder.com/150'),
         Book(title='Zen: The Art of Simple Living', author='Shunmyo Masuno', isbn='9780241371831', available_copies=3, image_url='https://via.placeholder.com/150'),
     ]
-    for i in range(3, 53):  # Add ~50 more books
+    for i in range(3, 53):
         books.append(Book(title=f'Book {i}', author=f'Author {i}', isbn=f'ISBN{i:013d}', available_copies=5, image_url='https://via.placeholder.com/150'))
     db.session.add_all(books)
     db.session.commit()
 
-    # Seed borrow records and reviews (optional)
+    # Seed borrow records and reviews
     borrow1 = BorrowRecord(user_id=user1.id, book_id=books[0].id, borrow_date=datetime.utcnow())
     review1 = Review(user_id=user1.id, book_id=books[0].id, rating=4, comment='Great book!')
     db.session.add_all([borrow1, review1])

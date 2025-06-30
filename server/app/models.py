@@ -1,7 +1,4 @@
-from flask_sqlalchemy import SQLAlchemy 
-
-# db will be injected by the app context
-db = None  # Placeholder, will be overridden by the app
+from app import db  # Import the module-level db
 
 class User(db.Model):
     __tablename__ = 'users'

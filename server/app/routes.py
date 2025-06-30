@@ -1,16 +1,15 @@
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
+from app import db  # Import db from app
 from app.models import User, Book, BorrowRecord, Review
 import bcrypt
 from datetime import datetime
 import logging
 
 bp = Blueprint('api', __name__)
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.DEBUG) 
 
-from app import db  
-
-@bp.route('/api/books', methods=['GET']) 
+@bp.route('/api/books', methods=['GET'])
 def get_books():
     try:
         logging.debug("Entering get_books endpoint")
