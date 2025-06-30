@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://library-management-system-backend-ngys.onrender.com';
+const API_URL = 'https://library-management-system-backend-ngys.onrender.com/api';
 
 export const getBooks = async () => {
   const response = await fetch(`${API_URL}/books`, {
