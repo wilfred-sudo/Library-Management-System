@@ -1,5 +1,5 @@
-from app import create_app
-from app.models import db, User, Book, BorrowRecord, Review
+from app import create_app, db
+from app.models import User, Book, BorrowRecord, Review
 import seed
 import os
 
