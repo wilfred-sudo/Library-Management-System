@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
-from .models import db, User, Book, BorrowRecord, Review
+from app.models import User, Book, BorrowRecord, Review
 import bcrypt
 from datetime import datetime
 import logging
@@ -8,8 +8,9 @@ import logging
 bp = Blueprint('api', __name__)
 logging.basicConfig(level=logging.DEBUG)
 
-@bp.route('/api/books', methods=['GET'])
+from app import db  
 
+@bp.route('/api/books', methods=['GET']) 
 def get_books():
     try:
         logging.debug("Entering get_books endpoint")
@@ -42,7 +43,7 @@ def get_books():
                 } for r in book.reviews] if book.reviews else []
             } for book in books
         ]
-        logging.debug(f"Serialized books: {serialized_books[:1]}")  # Log first book for brevity
+        logging.debug(f"Serialized books: {serialized_books[:1]}")
         return jsonify(serialized_books)
     except Exception as e:
         logging.error(f"Error in get_books: {str(e)}")
