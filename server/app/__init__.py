@@ -3,6 +3,9 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS 
 
+
+CORS(app, resources={r"/api/*": {"origins": "https://library-management-system-frontend-n7sn.onrender.com"}})
+
 db = SQLAlchemy()
 jwt = JWTManager()
 
