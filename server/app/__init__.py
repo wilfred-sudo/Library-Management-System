@@ -1,29 +1,27 @@
-from flask import Flask, send_from_directory
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_cors import CORS
-import os
+from flask_jwt_extended import JWTManager
+from flask_cors import CORS 
 
-db = SQLAlchemy()  # Module-level instance
+db = SQLAlchemy()
+jwt = JWTManager()
 
 def create_app():
-    app = Flask(__name__, static_folder='../build', static_url_path='')
-    CORS(app, resources={r"/api/*": {"origins": "https://library-management-system-frontend-n7sn.onrender.com"}})
-
-    # Configure and initialize SQLAlchemy
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:///library.db')
+    app = Flask(__name__)
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///library.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    db.init_app(app)  # Bind db to the app
+    app.config['JWT_ACCESS_TOKEN_EXPIRES'] = False
+    app.config['JWT_SECRET_KEY'] = 'yusufmim123'  
+    app.config['JWT_TOKEN_LOCATION'] = ['headers']  
+    CORS(app)
 
-    # Register blueprints
+    db.init_app(app)
+    jwt.init_app(app)
+
+    with app.app_context():
+        db.create_all()
+
     from .routes import bp
     app.register_blueprint(bp)
 
-    # Serve React build files
-    @app.route('/', defaults={'path': ''})
-    @app.route('/<path:path>')
-    def serve(path):
-        if path != "" and os.path.exists(os.path.join(app.static_folder, path)):
-            return send_from_directory(app.static_folder, path)
-        return send_from_directory(app.static_folder, 'index.html')
-
-    return app
+    return app 
