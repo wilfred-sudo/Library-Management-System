@@ -1,10 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import JWTManager
-from flask_cors import CORS 
-
-
-CORS(app, resources={r"/api/*": {"origins": "https://library-management-system-frontend-n7sn.onrender.com"}})
+from flask_cors import CORS
 
 db = SQLAlchemy()
 jwt = JWTManager()
@@ -12,11 +9,11 @@ jwt = JWTManager()
 def create_app():
     app = Flask(__name__)
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///library.db'
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['JWT_ACCESS_TOKEN_EXPIRES'] = False
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
     app.config['JWT_SECRET_KEY'] = 'yusufmim123'  
     app.config['JWT_TOKEN_LOCATION'] = ['headers']  
-    CORS(app)
+
+    CORS(app, resources={r"/api/*": {"origins": "https://library-management-system-frontend-n7sn.onrender.com"}})
 
     db.init_app(app)
     jwt.init_app(app)
@@ -27,4 +24,4 @@ def create_app():
     from .routes import bp
     app.register_blueprint(bp)
 
-    return app 
+    return app
